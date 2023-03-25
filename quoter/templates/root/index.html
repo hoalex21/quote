@@ -1,4 +1,7 @@
 {% extends "layouts/base.html" %}
 
 {% block body %}
+    {% if current_user.is_authenticated %}
+        <h1>Logged in as {{ current_user.username }}</h1>
+    {% endif %}
 {% endblock %}

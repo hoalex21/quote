@@ -10,3 +10,8 @@ class RegisterForm(FlaskForm):
     password = PasswordField("Password", [validators.EqualTo("confirm_password", "Passwords must match.")])
     confirm_password = PasswordField()
     submit = SubmitField("Register")
+
+class LoginForm(FlaskForm):
+    email = EmailField()
+    password = PasswordField()
+    submit = SubmitField("Login")

@@ -1,0 +1,14 @@
+{% from "layouts/_formhelpers.html" import render_field %}
+
+{% extends "layouts/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <form method="post">
+        {{ form.csrf_token }}
+        {{ render_field(form.email) }}
+        {{ render_field(form.password) }}
+        {{ form.submit }}
+    </form>
+{% endblock %}
