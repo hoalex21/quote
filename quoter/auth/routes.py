@@ -1,3 +1,5 @@
+from functools import wraps
+
 from flask import Blueprint, redirect, url_for, render_template, flash
 from flask_login import current_user, login_user, login_required, logout_user
 
@@ -13,12 +15,17 @@ auth = Blueprint("auth", __name__)
 def load_user(user_id):
     return User.query.filter_by(id=user_id).first()
 
-@auth.route("/register", methods=["GET", "POST"])
-def register():
-    # TODO: Make decorator for this. Users can only access register and login page if logged out
-    if current_user.is_authenticated:
-        return redirect(url_for("root.index"))
+def logout_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if current_user.is_authenticated:
+            return redirect(url_for("root.index"))
+        return f(*args, **kwargs)
+    return decorated_function
 
+@auth.route("/register", methods=["GET", "POST"])
+@logout_required
+def register():
     form = RegisterForm()
     if form.validate_on_submit():
         email = form.email.data
@@ -33,11 +40,8 @@ def register():
     return render_template("auth/register.html", form=form)
 
 @auth.route("/login", methods=["GET", "POST"])
+@logout_required
 def login():
-    # TODO: Replace with a custom decorator.
-    if current_user.is_authenticated:
-        return redirect(url_for("root.index"))
-
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
