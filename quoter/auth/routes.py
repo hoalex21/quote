@@ -1,6 +1,6 @@
 from functools import wraps
 
-from flask import Blueprint, redirect, url_for, render_template, flash
+from flask import Blueprint, redirect, url_for, render_template
 from flask_login import current_user, login_user, login_required, logout_user
 
 from quoter import login_manager, bcrypt, db
@@ -47,7 +47,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None:
             if bcrypt.check_password_hash(user.password, form.password.data):
-                login_user(user)
+                login_user(user, form.remember.data)
                 return redirect(url_for("root.index"))
             else:
                 # TODO: Handle incorrect password

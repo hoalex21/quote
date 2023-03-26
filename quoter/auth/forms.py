@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import EmailField, StringField, PasswordField, SubmitField, validators
+from wtforms import EmailField, StringField, PasswordField, SubmitField, BooleanField, validators
 
 
 class RegisterForm(FlaskForm):
@@ -14,4 +14,5 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     email = EmailField()
     password = PasswordField()
+    remember = BooleanField("Remember Me")
     submit = SubmitField("Login")
