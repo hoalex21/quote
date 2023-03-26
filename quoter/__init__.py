@@ -23,8 +23,8 @@ bcrypt = Bcrypt(app)
 # Register Blueprints
 from quoter.root.routes import root
 app.register_blueprint(root)
-from quoter.auth.routes import auth
-app.register_blueprint(auth)
+from quoter.users.routes import users
+app.register_blueprint(users)
 
 def create_app():
     return app

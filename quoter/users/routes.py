@@ -8,7 +8,7 @@ from quoter.models import User
 
 from .forms import RegisterForm, LoginForm
 
-auth = Blueprint("auth", __name__)
+users = Blueprint("users", __name__)
 
 
 @login_manager.user_loader
@@ -23,7 +23,7 @@ def logout_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-@auth.route("/register", methods=["GET", "POST"])
+@users.route("/register", methods=["GET", "POST"])
 @logout_required
 def register():
     form = RegisterForm()
@@ -37,9 +37,9 @@ def register():
         db.session.add(user.id)
         db.session.commit()
         return redirect(url_for("root.index"))
-    return render_template("auth/register.html", form=form)
+    return render_template("users/register.html", form=form)
 
-@auth.route("/login", methods=["GET", "POST"])
+@users.route("/login", methods=["GET", "POST"])
 @logout_required
 def login():
     form = LoginForm()
@@ -55,10 +55,16 @@ def login():
         else:
             # TODO: Handle incorrect username
             pass
-    return render_template("auth/login.html", form=form)
+    return render_template("users/login.html", form=form)
 
-@auth.route("/logout", methods=["GET", "POST"])
+@users.route("/logout", methods=["GET", "POST"])
 @login_required
 def logout():
     logout_user()
-    return render_template("auth/logout.html")
+    return render_template("users/logout.html")
+
+# TODO: Make user profile page
+@users.route("/profile/<username>")
+def profile(username):
+    user = User.query.filter_by(username=username).first()
+    return render_template('users/profile.html', user=user, username=username)

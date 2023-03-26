@@ -1,0 +1,9 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+    {% if user %}
+        <h1>{{ user.username }}'s Profile</h1>
+    {% else %}
+        <h1>User "{{ username }}" was not found.</h1>
+    {% endif %}
+{% endblock %}
