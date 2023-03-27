@@ -1,0 +1,14 @@
+{% macro render_profile_main(user) %}
+<section class="text-center border-bottom">
+    <img style="width: 10vh; height: 10vh;" class="rounded-circle border mb-2" src="{{ user.picture }}" />
+    <h3>@{{ user.username }}</h3>
+    <h5>{{ user.first_name }} {{ user.last_name }}</h5>
+</section>
+<section class="border-bottom navbar-expand-lg">
+    <ul class="navbar-nav mr-auto d-flex justify-content-around">
+        <li class="nav-link">Activity</li>
+        <li class="nav-link">Posts</li>
+        <li class="nav-link">Liked</li>
+    </ul>
+</section>
+{% endmacro %}

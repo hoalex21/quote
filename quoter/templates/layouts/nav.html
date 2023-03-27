@@ -1,19 +1,25 @@
 {% from "layouts/_navhelpers.html" import render_link %}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{{ url_for('root.index') }}">Quoter</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('root.index') }}">Quoter</a>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            {{ render_link(url_for('root.index'), "Home") }}
-            {% if current_user.is_authenticated %}
-                {{ render_link(url_for('users.profile', username=current_user.username), "Profile") }}
-                {{ render_link(url_for('users.logout'), "Logout") }}
-                {{ render_link(url_for('posts.create'), "Post") }}
-            {% else %}
-                {{ render_link(url_for('users.register'), "Register") }}
-                {{ render_link(url_for('users.login'), "Login") }}
-            {% endif %}
-        </ul>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                {{ render_link(url_for('root.index'), "Home") }}
+                {% if current_user.is_authenticated %}
+                    {{ render_link(url_for('users.profile', username=current_user.username), "Profile") }}
+                    {{ render_link(url_for('posts.create'), "Post") }}
+                    {{ render_link(url_for('users.logout'), "Logout") }}
+                {% else %}
+                    {{ render_link(url_for('users.register'), "Register") }}
+                    {{ render_link(url_for('users.login'), "Login") }}
+                {% endif %}
+            </ul>
+        </div>
     </div>
 </nav>
