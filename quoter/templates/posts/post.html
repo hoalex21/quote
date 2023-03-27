@@ -1,0 +1,10 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+    {% if post %}
+        <h4>{{ post.author }}</h4>
+        <p>{{ post.content }}</p>
+    {% else %}
+        <h1>Post {{ post_id }} was not found.</h1>
+    {% endif %}
+{% endblock %}

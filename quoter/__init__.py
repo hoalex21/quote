@@ -25,6 +25,8 @@ from quoter.root.routes import root
 app.register_blueprint(root)
 from quoter.users.routes import users
 app.register_blueprint(users)
+from quoter.posts.routes import posts
+app.register_blueprint(posts)
 
 def create_app():
     return app

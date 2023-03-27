@@ -4,7 +4,7 @@ from flask import Blueprint, redirect, url_for, render_template
 from flask_login import current_user, login_user, login_required, logout_user
 
 from quoter import login_manager, bcrypt, db
-from quoter.models import User
+from quoter.models.user import User
 
 from .forms import RegisterForm, LoginForm
 
@@ -63,7 +63,6 @@ def logout():
     logout_user()
     return render_template("users/logout.html")
 
-# TODO: Make user profile page
 @users.route("/profile/<username>")
 def profile(username):
     user = User.query.filter_by(username=username).first()

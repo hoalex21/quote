@@ -1,6 +1,6 @@
 from flask_login import UserMixin
 
-from . import db
+from quoter import db
 
 
 class User(UserMixin, db.Model):
@@ -10,3 +10,4 @@ class User(UserMixin, db.Model):
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     password = db.Column(db.String)
+    posts = db.relationship('Post', backref='post')
