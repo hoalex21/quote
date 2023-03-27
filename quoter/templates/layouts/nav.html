@@ -1,25 +1,18 @@
+{% from "layouts/_navhelpers.html" import render_link %}
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="{{ url_for('root.index') }}">Quoter</a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('root.index') }}">Home</a>
-            </li>
+            {{ render_link(url_for('root.index'), "Home") }}
             {% if current_user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('users.logout') }}">Logout</a>
-            </li>
-            <li>
-                <a class="nav-link" href="{{ url_for('posts.create') }}">Post</a>
-            </li>
+                {{ render_link(url_for('users.profile', username=current_user.username), "Profile") }}
+                {{ render_link(url_for('users.logout'), "Logout") }}
+                {{ render_link(url_for('posts.create'), "Post") }}
             {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('users.register') }}">Register</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('users.login') }}">Login</a>
-            </li>
+                {{ render_link(url_for('users.register'), "Register") }}
+                {{ render_link(url_for('users.login'), "Login") }}
             {% endif %}
         </ul>
     </div>
