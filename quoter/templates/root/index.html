@@ -2,8 +2,22 @@
 
 {% block content %}
     {% if posts %}
+        <div class="border-top"></div>
         {% for post in posts %}
-            <h1>{{ post.user }}</h1>
+        <section class="container border-bottom mb-2">
+            <div>
+                <a href="{{ url_for('users.profile', username=post.user.username) }}" class="d-flex">
+                    <img style="width: 7vh; height: 7vh;" class="rounded-circle border mt-2 mb-2 mr-2" src="{{ post.user.picture }}" />
+                    <h4 class="align-self-center">@{{ post.user.username }}</h4>
+                </a>
+            </div>
+
+            <div>
+                <p>{{ post.content }}</p>
+            </div>
+
+            <h5>{{ post.date_posted }} UTC</h5>
+        </section>
         {% endfor %}
     {% endif %}
 {% endblock %}
