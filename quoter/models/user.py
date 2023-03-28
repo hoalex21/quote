@@ -10,4 +10,4 @@ class User(UserMixin, db.Model):
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     password = db.Column(db.String)
-    posts = db.relationship('Post', backref='post')
+    posts = db.relationship('Post', backref='user')

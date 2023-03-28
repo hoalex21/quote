@@ -34,7 +34,7 @@ def register():
         last_name = form.last_name.data
         password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(email=email, username=username, first_name=first_name, last_name=last_name, password=password)
-        db.session.add(user.id)
+        db.session.add(user)
         db.session.commit()
         return redirect(url_for("root.index"))
     return render_template("users/register.html", form=form)

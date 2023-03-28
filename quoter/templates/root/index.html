@@ -1,7 +1,9 @@
 {% extends "layouts/base.html" %}
 
 {% block content %}
-    {% if current_user.is_authenticated %}
-        <h1>Logged in as {{ current_user.username }}</h1>
+    {% if posts %}
+        {% for post in posts %}
+            <h1>{{ post.user }}</h1>
+        {% endfor %}
     {% endif %}
 {% endblock %}
