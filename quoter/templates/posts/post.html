@@ -2,8 +2,12 @@
 
 {% block content %}
     {% if post %}
-        <h4>{{ post.author }}</h4>
+        <h4>{{ post.user.username }}</h4>
         <p>{{ post.content }}</p>
+        <p>Likes: {{ post.liked|length }}</p>
+        <form method="post">
+            {{ form.submit }}
+        </form>
     {% else %}
         <h1>Post {{ post_id }} was not found.</h1>
     {% endif %}
